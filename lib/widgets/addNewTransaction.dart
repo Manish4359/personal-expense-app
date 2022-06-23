@@ -17,98 +17,102 @@ class AddNewTransaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
-      ),
+          //backgroundColor: Colors.black,
+          ),
       body: Container(
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 10),
-            TextField(
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black, width: 2),
-                ),
-                labelText: 'Amount',
-                labelStyle: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                  color: Color.fromARGB(255, 136, 136, 136),
-                ),
-                hintText: 'Add an amount',
-                hintStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                prefixIcon: Container(
-                  margin: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(5),
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10),
+              TextField(
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black, width: 2),
                   ),
-                  child: Icon(
-                    Icons.currency_rupee_rounded,
-                    color: Colors.white,
-                    size: 50,
+                  labelText: 'Amount',
+                  labelStyle: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 136, 136, 136),
                   ),
+                  hintText: 'Add an amount',
+                  hintStyle:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                  prefixIcon: Container(
+                    margin: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.currency_rupee_rounded,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                  ),
+                  prefixIconConstraints:
+                      BoxConstraints(maxHeight: 60, maxWidth: 60),
+                  suffixText: 'INR',
                 ),
-                prefixIconConstraints:
-                    BoxConstraints(maxHeight: 60, maxWidth: 60),
-                suffixText: 'INR',
+                controller: cardAmount,
+                keyboardType: TextInputType.number,
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
               ),
-              controller: cardAmount,
-              keyboardType: TextInputType.number,
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black, width: 2),
-                ),
-                labelText: 'Title',
-                labelStyle: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                  color: Color.fromARGB(255, 136, 136, 136),
-                ),
-                hintText: 'Add a title',
+              SizedBox(
+                height: 50,
               ),
-              cursorColor: Colors.black,
-              controller: cardtitle,
-              keyboardType: TextInputType.name,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-            ),
-            SizedBox(height: 50),
-            ElevatedButton(
-                onPressed: () {
-                  Transaction newtr = Transaction(
-                    title: cardtitle.text,
-                    amount: int.parse(cardAmount.text),
-                    date: DateTime.now(),
-                    id: this.newIndex,
-                  );
-                  this.addToList(newtr);
+              TextField(
+                decoration: InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black, width: 2),
+                  ),
+                  labelText: 'Title',
+                  labelStyle: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 136, 136, 136),
+                  ),
+                  hintText: 'Add a title',
+                ),
+                cursorColor: Colors.black,
+                controller: cardtitle,
+                keyboardType: TextInputType.name,
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+              ),
+              SizedBox(height: 50),
+              ElevatedButton(
+                  onPressed: () {
+                    Transaction newtr = Transaction(
+                      title: cardtitle.text,
+                      amount: int.parse(cardAmount.text),
+                      date: DateTime.now(),
+                      id: this.newIndex,
+                    );
+                    this.addToList(newtr);
 
-                  Navigator.pop(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.black),
-                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      EdgeInsets.all(20)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                ),
-                child: Text(
-                  'Add transaction',
-                  style: TextStyle(fontSize: 20),
-                )),
-          ],
+                    Navigator.pop(context);
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Theme.of(context).colorScheme.secondary),
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        EdgeInsets.all(20)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20))),
+                  ),
+                  child: Text(
+                    'Add transaction',
+                    style: TextStyle(fontSize: 20),
+                  )),
+            ],
+          ),
         ),
       ),
     );

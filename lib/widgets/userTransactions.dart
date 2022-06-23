@@ -20,15 +20,17 @@ class _UserTransactionsState extends State<UserTransactions> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: SingleChildScrollView(
-        physics: ScrollPhysics(),
-        child: Column(
-          children: [
-            ...widget.list.map((tr) => TransactionCard(
-                  transactionData: tr,
-                  removeTr: widget.removeTransaction,
-                )),
-          ],
+      //flex: 5,
+      //height: 250,
+
+      child: Scrollbar(
+        radius: Radius.circular(20),
+        child: ListView.builder(
+          itemCount: widget.list.length,
+          itemBuilder: (context, id) => TransactionCard(
+            transactionData: widget.list[id],
+            removeTr: widget.removeTransaction,
+          ),
         ),
       ),
     );
